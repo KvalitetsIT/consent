@@ -43,96 +43,61 @@ $dstName = $this->data['dstName'];
 
 $attributes = $this->data['attributes'];
 
+$pdfurl = "../../getconsenttemplate.php?StateId=" . $_REQUEST['StateId'];
+
 $headerTitle = $this->t('{consent:consent:consent_title}');
 require "header.php";
 ?>
 <div class="pin-input-container">
-    <div>
-        <?php echo getcwd()?>
+    <div class="button-container">
         <h6 class="mdc-typography--headline6"><?php echo $this->t('{consent:consent:header}') ?></h6>
         <p class="mdc-typography--body1"><?php echo $this->t($this->data['acceptText'], array('SPNAME' => $dstName)) ?></p>
+
+        <a target='_blank' id='seeconsentbutton' class='mdc-button mdc-button--unelevated large-button'
+           href="<?php echo 'pdfjs/web/viewer.html?file=' . urlencode($pdfurl) ?>"><?php echo $this->t("{consent:consent:seeconsent}") ?></a>
+        <?php echo "<a target='_blank' id='seeconsentbutton_old' class='btn btn-default' href='pdfjs/web/viewer.html?file=" . urlencode($pdfurl) . "'>" . $this->t('{consent:consent:seeconsent}') . "</a>"; ?>
     </div>
 </div>
+</div
 <div class="button-container">
-    <button onclick="" class="mdc-button mdc-button--unelevated large-button">
-        <div class="mdc-button__ripple"></div>
-        <span class="mdc-button__label"><?php echo $this->t('{activationmodule:activation:usevenliglogin}') ?></span>
-    </button>
-    <button onclick="" class="mdc-button mdc-button--outlined large-button">
-        <div class="mdc-button__ripple"></div>
-        <span class="mdc-button__label"><?php echo $this->t('{activationmodule:activation:donotusevenliglogin}') ?></span>
-    </button>
-</div>
-</div>
-    <p>
+    <form action="<?php echo htmlspecialchars($this->data['yesTarget']); ?>">
         <?php
-        echo $this->t($this->data['acceptText'], array('SPNAME' => $dstName));
-
-        if (array_key_exists('descr_purpose', $this->data['dstMetadata'])) {
-            echo '</p><p>' . $this->t(
-                    '{consent:consent:consent_purpose}',
-                    array(
-                        'SPNAME' => $dstName,
-                        'SPDESC' => $this->getTranslation(
-                            SimpleSAML_Utilities::arrayize(
-                                $this->data['dstMetadata']['descr_purpose'],
-                                'en'
-                            )
-                        ),
-                    )
-                );
+        // Embed hidden fields...
+        foreach ($this->data['yesData'] as $name => $value) {
+            echo '<input type="hidden" name="' . htmlspecialchars($name) .
+                '" value="' . htmlspecialchars($value) . '" />';
         }
         ?>
-    </p>
-
-    <form style="display: inline; margin: 0px; padding: 0px"
-          action="<?php echo htmlspecialchars($this->data['yesTarget']); ?>">
-        <p style="margin: 1em">
-
-            <?php
-            // Embed hidden fields...
-            foreach ($this->data['yesData'] as $name => $value) {
-                echo '<input type="hidden" name="' . htmlspecialchars($name) .
-                    '" value="' . htmlspecialchars($value) . '" />';
-            }
-            ?>
-        </p>
-        <input type="submit" name="yes" class="btn btn-primary" id="yesbutton"
-               value="<?php echo htmlspecialchars($this->t('{consent:consent:yes}')) ?>"/>
+        <button type="submit" class="mdc-button mdc-button--unelevated large-button" name="yes" id="yesbutton"
+                value="">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:yes}')) ?></span>
+        </button>
     </form>
 
-    <form style="display: inline; margin-left: .5em;" action="<?php echo htmlspecialchars($this->data['noTarget']); ?>"
-          method="get">
-
+    <form action="<?php echo htmlspecialchars($this->data['noTarget']); ?>" method="get">
         <?php
         foreach ($this->data['noData'] as $name => $value) {
             echo('<input type="hidden" name="' . htmlspecialchars($name) .
                 '" value="' . htmlspecialchars($value) . '" />');
         }
         ?>
-        <input type="submit" style="display: inline" class="btn btn-default" name="no" id="nobutton"
-               value="<?php echo htmlspecialchars($this->t('{consent:consent:no}')) ?>"/>
+        <button type="submit" class="mdc-button mdc-button--outlined large-button" name="no" id="nobutton"
+                value="">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:no}')) ?></span>
+        </button>
     </form>
+</div>
 
-    <script>
-        $(document).ready(function () {
-            $('#yesbutton').prop('disabled', true);
+<script>
+    $(document).ready(function () {
+        $('#yesbutton').prop('disabled', true);
 
-            $('#seeconsentbutton').click(function () {
-                $('#yesbutton').prop('disabled', false);
-            });
-
+        $('#seeconsentbutton').click(function () {
+            $('#yesbutton').prop('disabled', false);
         });
+    });
+</script>
 
-
-    </script>
-
-<?php
-
-$pdfurl = "../../getconsenttemplate.php?StateId=" . $_REQUEST['StateId'];
-
-echo "<a target='_blank' id='seeconsentbutton' class='btn btn-default' href='pdfjs/web/viewer.html?file=" . urlencode($pdfurl) . "'>" . $this->t('{consent:consent:seeconsent}') . "</a>";
-
-$this->includeAtTemplateBase('includes/footer.php');
-
-?>
+<?php require "header.php"; ?>
