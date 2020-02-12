@@ -49,18 +49,17 @@ $headerTitle = $this->t('{consent:consent:consent_title}');
 require "header.php";
 ?>
 <div class="pin-input-container">
-    <div class="button-container">
+    <div class="center-content button-container">
         <h6 class="mdc-typography--headline6"><?php echo $this->t('{consent:consent:header}') ?></h6>
         <p class="mdc-typography--body1"><?php echo $this->t($this->data['acceptText'], array('SPNAME' => $dstName)) ?></p>
 
         <a target='_blank' id='seeconsentbutton' class='mdc-button mdc-button--unelevated large-button'
            href="<?php echo 'pdfjs/web/viewer.html?file=' . urlencode($pdfurl) ?>"><?php echo $this->t("{consent:consent:seeconsent}") ?></a>
-        <?php echo "<a target='_blank' id='seeconsentbutton_old' class='btn btn-default' href='pdfjs/web/viewer.html?file=" . urlencode($pdfurl) . "'>" . $this->t('{consent:consent:seeconsent}') . "</a>"; ?>
     </div>
 </div>
 </div
-<div class="button-container">
-    <form action="<?php echo htmlspecialchars($this->data['yesTarget']); ?>">
+<div class="center-content">
+    <form action="<?php echo htmlspecialchars($this->data['yesTarget']); ?>" class="center-content">
         <?php
         // Embed hidden fields...
         foreach ($this->data['yesData'] as $name => $value) {
@@ -75,7 +74,7 @@ require "header.php";
         </button>
     </form>
 
-    <form action="<?php echo htmlspecialchars($this->data['noTarget']); ?>" method="get">
+    <form action="<?php echo htmlspecialchars($this->data['noTarget']); ?>" method="get" class="center-content">
         <?php
         foreach ($this->data['noData'] as $name => $value) {
             echo('<input type="hidden" name="' . htmlspecialchars($name) .
