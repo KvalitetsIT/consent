@@ -1,4 +1,7 @@
 {
+	"header": {
+		"en": "Samtykkeerklæring"
+	},
 	"yes": {
 		"en": "OK, jeg giver samtykke"
 	},
@@ -44,7 +47,7 @@
 	"noconsent_return": {
 		"en": "Gå tilbage"
 	},
-	"consent_header": {
+	"consent_title": {
 		"en": "Samtykke"
 	},
 	"consent_attributes_header": {

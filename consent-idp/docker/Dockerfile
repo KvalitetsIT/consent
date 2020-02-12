@@ -1,6 +1,6 @@
 FROM ianblenke/simplesamlphp:1.13.2
 
-RUN  apt-get update && apt-get install gettext -y
+RUN apt-get update && apt-get install gettext -y --force-yes
 
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
@@ -23,11 +23,10 @@ ADD modules/consent/Consent.php /var/simplesamlphp/modules/consent/lib/Auth/Proc
 ADD modules/consent/Store.php /var/simplesamlphp/modules/consent/lib
 ADD modules/consent/getconsent.php /var/simplesamlphp/modules/consent/www
 ADD modules/consent/getconsenttemplate.php /var/simplesamlphp/modules/consent/www
-ADD modules/consent/consentform.php /var/simplesamlphp/modules/consent/templates
-ADD modules/consent/noconsent.php /var/simplesamlphp/modules/consent/templates
-ADD modules/consent/logout_completed.php /var/simplesamlphp/modules/consent/templates
+ADD modules/consent/templates /var/simplesamlphp/modules/consent/templates
 ADD modules/consent/consent.definition.json /var/simplesamlphp/modules/consent/dictionaries
-ADD modules/consent/jquery-1.11.3.min.js /var/simplesamlphp/modules/consent/www
+
+ADD modules/consent/assets /var/simplesamlphp/www/resources/assets
 
 ADD modules/consent/pdfjs /var/simplesamlphp/modules/consent/www/pdfjs
 
