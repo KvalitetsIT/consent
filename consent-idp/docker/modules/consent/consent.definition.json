@@ -3,10 +3,10 @@
 		"en": "Samtykkeerklæring"
 	},
 	"yes": {
-		"en": "OK, jeg giver samtykke"
+		"en": "Jeg giver samtykke"
 	},
 	"no": {
-		"en": "Jeg giver ikke samtykke"
+		"en": "Nej tak"
 	},
 	"seeconsent": {
 		"en": "Læs samtykkeerklæring"
@@ -15,7 +15,7 @@
 		"en": "Remember"
 	},
 	"consent_accept": {
-		"en": "\"SPNAME\" kræver dit samtykke for at tilgå applikationen. Du skal læse og acceptere samtykkeerklæringen før du kan fortsætte. Knappen \"Læs samtykkeerklæring\" åbner et nyt vindue. Du skal lukke vinduet for at komme tilbage til denne side."
+		"en": "For at kunne bruge denne applikation skal du aktivt give samtykke til at \"SPNAME\" behandler dine personoplysninger. Denne erklæring beskriver nærmere, hvad du samtykker til.\n\nDu kan til hver en tid trække dit samtykke tilbage i appen."
 	},
 	"consent_accept_deprecated": {
 		"en": "Der er kommet en ny samtykkeerklæring for applikationen \"SPNAME\", som du skal læse og acceptere før du kan fortsætte. Knappen \"Læs samtykkeerklæring\" åbner et nyt vindue. Du skal lukke vinduet for at komme tilbage til denne side."
