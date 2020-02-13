@@ -48,16 +48,16 @@ $pdfurl = "../../getconsenttemplate.php?StateId=" . $_REQUEST['StateId'];
 $headerTitle = $this->t('{consent:consent:consent_title}');
 require "header.php";
 ?>
-<div class="pin-input-container">
+<div id="mainContainer" class="main-container">
     <div class="center-content">
         <h6 class="mdc-typography--headline6"><?php echo $this->t('{consent:consent:header}') ?></h6>
-        <p class="mdc-typography--body1"><?php echo $this->t($this->data['acceptText'], array('SPNAME' => $dstName)) ?></p>
+        <p class="mdc-typography--body1 left"><?php echo $this->t($this->data['acceptText'], array('SPNAME' => $dstName)) ?></p>
 
-        <a target='_blank' id='seeconsentbutton' class='mdc-button mdc-button--unelevated large-button'
-           href="<?php echo 'pdfjs/web/viewer.html?file=' . urlencode($pdfurl) ?>">
+        <button type="submit" class="mdc-button mdc-button--unelevated large-button" name="see"
+                id="seeconsentbutton">
             <div class="mdc-button__ripple"></div>
-            <span class="mdc-button__label"><?php echo $this->t("{consent:consent:seeconsent}") ?></span>
-        </a>
+            <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:seeconsent}')) ?></span>
+        </button>
     </div>
 
     <div class="center-content button-container">
@@ -69,8 +69,7 @@ require "header.php";
                     '" value="' . htmlspecialchars($value) . '" />';
             }
             ?>
-            <button type="submit" class="mdc-button mdc-button--unelevated large-button" name="yes" id="yesbutton"
-                    value="">
+            <button type="submit" class="mdc-button mdc-button--unelevated large-button" name="yes">
                 <div class="mdc-button__ripple"></div>
                 <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:yes}')) ?></span>
             </button>
@@ -78,25 +77,45 @@ require "header.php";
 
         <form action="<?php echo htmlspecialchars($this->data['noTarget']); ?>" method="get" class="center-content">
             <?php
+            // Embed hidden fields...
             foreach ($this->data['noData'] as $name => $value) {
                 echo('<input type="hidden" name="' . htmlspecialchars($name) .
                     '" value="' . htmlspecialchars($value) . '" />');
             }
             ?>
-            <button type="submit" class="mdc-button mdc-button--outlined large-button" name="no" id="nobutton"
-                    value="">
+            <button type="submit" class="mdc-button mdc-button--outlined large-button" name="no">
                 <div class="mdc-button__ripple"></div>
                 <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:no}')) ?></span>
             </button>
         </form>
     </div>
 </div>
+
+<div id="pdfContainer" class="main-container"
+     style="display:none">
+    <div class="center-content flex-fill">
+        <h6 class="mdc-typography--headline6"><?php echo $this->t('{consent:consent:header}') ?></h6>
+        <iframe class="pdf-viewer" src="<?php echo 'pdfjs/web/viewer.html?file=' . urlencode($pdfurl) ?>">
+        </iframe>
+    </div>
+    <div class="center-content button-container">
+        <button id="closePdfBtn" class="mdc-button mdc-button--outlined large-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:close_consent}')) ?></span>
+        </button>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
-        $('#yesbutton').prop('disabled', true);
-
         $('#seeconsentbutton').click(function () {
-            $('#yesbutton').prop('disabled', false);
+            $('#mainContainer').hide();
+            $('#pdfContainer').show();
+        });
+
+        $('#closePdfBtn').click(function () {
+            $('#mainContainer').show();
+            $('#pdfContainer').hide();
         });
     });
 </script>

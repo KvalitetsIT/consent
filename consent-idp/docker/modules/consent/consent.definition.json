@@ -11,11 +11,14 @@
 	"seeconsent": {
 		"en": "Læs samtykkeerklæring"
 	},
+	"close_consent": {
+		"en": "Tilbage"
+	},
 	"remember": {
 		"en": "Remember"
 	},
 	"consent_accept": {
-		"en": "For at kunne bruge denne applikation skal du aktivt give samtykke til at \"SPNAME\" behandler dine personoplysninger. Denne erklæring beskriver nærmere, hvad du samtykker til.\n\nDu kan til hver en tid trække dit samtykke tilbage i appen."
+		"en": "For at kunne bruge denne applikation skal du aktivt give samtykke til at \"SPNAME\" behandler dine personoplysninger. Denne erklæring beskriver nærmere, hvad du samtykker til.<br><br>Du kan til hver en tid trække dit samtykke tilbage i appen."
 	},
 	"consent_accept_deprecated": {
 		"en": "Der er kommet en ny samtykkeerklæring for applikationen \"SPNAME\", som du skal læse og acceptere før du kan fortsætte. Knappen \"Læs samtykkeerklæring\" åbner et nyt vindue. Du skal lukke vinduet for at komme tilbage til denne side."

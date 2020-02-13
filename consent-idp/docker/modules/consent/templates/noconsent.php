@@ -12,19 +12,27 @@ if (is_array($dstName)) {
 }
 $dstName = htmlspecialchars($dstName);
 
+$headerTitle = $this->t('{consent:consent:noconsent_title}');
+require "header.php";
+?>
 
-$this->data['header'] = $this->t('{consent:consent:noconsent_title}');;
+<div id="mainContainer" class="main-container">
+    <div class="center-content">
+        <h6 class="mdc-typography--headline6"><?php echo $this->t('{consent:consent:header}') ?></h6>
+        <p class="mdc-typography--body1 left"><?php echo $this->t('{consent:consent:noconsent_text}') ?></p>
+    </div>
+    <div class="center-content button-container">
+        <?php if ($this->data['resumeFrom']) { ?>
+            <a class="mdc-button mdc-button--unelevated large-button" href="<?php echo htmlspecialchars($this->data['resumeFrom']) ?>">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label"><?php echo $this->t('{consent:consent:noconsent_return}') ?></span>
+            </a>
+        <?php } ?>
+        <a class="mdc-button mdc-button--outlined large-button" href="<?php echo htmlspecialchars($this->data['logoutLink']) ?>">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"><?php echo $this->t('{consent:consent:abort}') ?></span>
+        </a>
+    </div>
+</div>
 
-$this->includeAtTemplateBase('includes/header.php');
-
-echo '<p>' . $this->t('{consent:consent:noconsent_text}') . '</p>';
-
-if ($this->data['resumeFrom']) {
-    echo('<a class="btn btn-primary" href="' . htmlspecialchars($this->data['resumeFrom']) . '">');
-    echo($this->t('{consent:consent:noconsent_return}'));
-    echo('</a>');
-}
-
-echo('<a class="btn btn-default" href="' . htmlspecialchars($this->data['logoutLink']) . '">' . $this->t('{consent:consent:abort}') . '</a>');
-
-$this->includeAtTemplateBase('includes/footer.php');
+<?php require "header.php"; ?>
