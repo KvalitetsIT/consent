@@ -99,7 +99,7 @@ require "header.php";
         </iframe>
     </div>
     <div class="center-content button-container">
-        <button id="closePdfBtn" class="mdc-button mdc-button--outlined large-button">
+        <button id="closePdfBtn" class="mdc-button mdc-button--unelevated large-button">
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label"><?php echo htmlspecialchars($this->t('{consent:consent:close_consent}')) ?></span>
         </button>
