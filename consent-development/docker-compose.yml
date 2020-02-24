@@ -1,7 +1,7 @@
 version: '2'
-services:   
+services:
    kitidp-theme:
-     image: kvalitetsit/simpleidp-theme:latest
+     image: kitdocker.kvalitetsit.dk/kvalitetsit/ekffidptheme:54b06eaf051db57b25409e7c09e1dadcaee032ee
    citizen-simpleidp:
      image: kitdocker.kvalitetsit.dk/kvalitetsit/simpleidp:216dc29366c81841266ee8ea7b44133d69bb10f9
      entrypoint: bash -c " ln -nsf /kitmodule /var/simplesamlphp/modules/kitmodule; /entrypoint.sh"
@@ -72,7 +72,7 @@ services:
       - ./appa/config:/certificates
      environment:
       - IDP_METADATA_URL=http://citizen-consentidp/consentidp/saml2/idp/metadata.php
-      - IDP_LOGIN_URL=http://localhost:8092/consentidp/saml2/idp/SSOService.php  
+      - IDP_LOGIN_URL=http://localhost:8092/consentidp/saml2/idp/SSOService.php
       - CERTIFICATE=/certificates/appa.cert
       - KEY=/certificates/appa.pem
       - SP_ENTITY_ID=dev:kit:appa
@@ -135,14 +135,14 @@ services:
       - MYSQL_DATABASE=consent
       - MYSQL_USER=consent
       - MYSQL_PASSWORD=consent1234
-    ports: 
+    ports:
       - "3306:3306"
    rabbitmq:
     build: rabbitmq
     image: kihdev/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_VHOST=/
-    ports: 
+    ports:
       - "15672:15672"
    jsontomqservice:
     image: kitdocker.kvalitetsit.dk/kvalitetsit/jsontomqservice:325c78518d984762bc714d76e28648b1e1f0c944
@@ -161,7 +161,7 @@ services:
      environment:
       - CONSENTSERVICE_URL=http://consentservice
       - CONTEXT=cwg
-      - SERVER_PORT=8080 
+      - SERVER_PORT=8080
      ports:
       - "8099:8080"
    consentadmingui:
@@ -169,6 +169,6 @@ services:
      environment:
       - CONSENTSERVICE_URL=http://consentservice
       - CONTEXT=cag
-      - SERVER_PORT=8080 
+      - SERVER_PORT=8080
      ports:
       - "8100:8080"
