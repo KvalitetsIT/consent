@@ -61,7 +61,7 @@ class sspmod_consent_Consent_Store_ConsentService extends sspmod_consent_Store
         $headers = getallheaders();
         $corrId = $headers[$this->correlationidheadername];
 
-        $jsonContent = '{"cpr": "'.$citizenId.'"}';
+        $jsonContent = '{"userId": "'.$citizenId.'"}';
         $curl = curl_init($serviceurl);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($curl, CURLOPT_POSTFIELDS, $jsonContent);
@@ -75,7 +75,7 @@ class sspmod_consent_Consent_Store_ConsentService extends sspmod_consent_Store
         $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $result = json_decode($curl_response);
         curl_close($curl);
-        $kommuneKode = $result->{'kommuneKode'};
+        $kommuneKode = $result->{'kommunekode'};
         return $kommuneKode;
     }
  
